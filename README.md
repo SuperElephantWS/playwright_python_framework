@@ -25,6 +25,9 @@ A modular, pytest-based **Playwright (Python)** framework for web UI testing.
    ```bash
    python scripts/bootstrap_signup.py --name "Jane Doe" --email "jane@example.com" --password "StrongPass123" --storage "auth/storage_state.json"
    ```
+   ```bash
+   python -m scripts.bootstrap_signup --name "Jane Doe" --email "test@example.com" --password "StrongPass123" --storage "auth/storage_state.json"
+   ```
 
 4. **Verify session works (smoke test)**
    ```bash
@@ -74,6 +77,8 @@ playwright install
 Run the bootstrap script (signup → login → save session):
 ```bash
 python scripts/bootstrap_signup.py --name "Jane Doe" --email "jane@example.com" --password "StrongPass123" --storage "auth/storage_state.json"
+```bash
+python -m scripts.bootstrap_signup --name "Jane Doe" --email "test@example.com" --password "StrongPass123" --storage "auth/storage_state.json"
 ```
 This will:
 - Open the demo **Sign Up** page (`/signup.html`)  
