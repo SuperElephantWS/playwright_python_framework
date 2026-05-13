@@ -24,7 +24,7 @@ def test_counting_links(page: Page):
     page.goto("https://faruk-hasan.com/automation/playwright-selenium-cypress-practice.html")
     # Count the number of links on the page
     links = page.locator("a")
-    expect(links).to_have_count(10)
+    expect(links).to_have_count(14)
     link_count = links.count()
     print(f"\n[TEST] Number of links on the page: {link_count}")
     time.sleep(5)

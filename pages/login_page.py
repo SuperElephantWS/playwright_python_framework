@@ -13,8 +13,3 @@ class LoginPage:
     def goto(self):
         self.page.goto(self.URL, wait_until="domcontentloaded")
         expect(self.page).to_have_title("Login - Automation Practice")
-
-    def login(self, username: str, password: str):
-        self.username.fill(username)
-        self.password.fill(password)
-        self.login_button.click()
