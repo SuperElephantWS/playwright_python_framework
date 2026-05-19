@@ -252,3 +252,5 @@ pytest -vv --html=reports/html/report.html --self-contained-html
 ---
 
 🎉 You’re all set — the framework signs up, logs in, saves the session, and reuses it for fast, reliable tests.
+
+Watson Testing here :)
