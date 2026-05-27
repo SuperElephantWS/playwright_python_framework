@@ -15,8 +15,43 @@ A modular, pytest-based **Playwright (Python)** framework for web UI testing.
 2. **Create virtualenv & install deps**
    ```bash
    python -m venv .venv
-   source .venv/bin/activate   # macOS/Linux
-   .venv\Scripts\Activate.ps1  # Windows
+
+   # Activate virtual environment
+
+   # macOS/Linux
+   source .venv/bin/activate
+
+   # Windows
+   .venv\Scripts\Activate.ps1
+   ```
+
+   If you see this error on Windows:
+
+   ```powershell
+   .venv\Scripts\Activate.ps1 cannot be loaded because running scripts is disabled on this system.
+   ```
+
+   Run:
+
+   ```powershell
+   Set-ExecutionPolicy RemoteSigned -Scope CurrentUser
+   ```
+
+   Then press:
+
+   ```powershell
+   Y
+   ```
+
+   After that, activate the virtual environment again:
+
+   ```powershell
+   .venv\Scripts\Activate.ps1
+   ```
+
+   Continue with installation:
+
+   ```bash
    pip install -r requirements.txt
    playwright install
    ```
@@ -32,12 +67,26 @@ A modular, pytest-based **Playwright (Python)** framework for web UI testing.
 
 4. **Verify session works (smoke test)**
    ```bash
-   pytest tests/test_logged_in.py -s
+   pytest tests/test_logged_in_session.py -s
    ```
-   > Tip: to **watch it in a real browser**, run headed:
-   > ```bash
-   > HEADLESS=false pytest -s tests/test_logged_in_session.py
-   > ```
+
+   > Tip: to **watch it in a real browser**, run headed.
+
+   ### macOS / Linux / Git Bash / WSL
+   ```bash
+   HEADLESS=false pytest -s tests/test_logged_in_session.py
+   ```
+
+   ### Windows PowerShell
+   ```powershell
+   $env:HEADLESS="false"
+   pytest -s tests/test_logged_in_session.py
+   ```
+
+   ### Windows Command Prompt (cmd)
+   ```cmd
+   set HEADLESS=false && pytest -s tests/test_logged_in_session.py
+   ```
 
 5. **Run the full suite**
    ```bash
