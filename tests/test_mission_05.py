@@ -10,18 +10,64 @@ EXPECTED_TITLE = "Playwright, Selenium & Cypress Practice | Interactive Automati
 def test_draggable(page: Page):
     page.goto("https://faruk-hasan.com/automation/playwright-selenium-cypress-practice.html")
 
+    def drag_element(page, source_selector, target_selector):
+        page.evaluate(
+            """
+            ({ sourceSelector, targetSelector }) => {
+                const source = document.querySelector(sourceSelector);
+                const target = document.querySelector(targetSelector);
+
+                const dataTransfer = new DataTransfer();
+
+                dataTransfer.setData("text/plain", source.id);
+
+                source.dispatchEvent(
+                    new DragEvent("dragstart", {
+                        bubbles: true,
+                        cancelable: true,
+                        dataTransfer
+                    })
+                );
+
+                target.dispatchEvent(
+                    new DragEvent("dragover", {
+                        bubbles: true,
+                        cancelable: true,
+                        dataTransfer
+                    })
+                );
+
+                target.dispatchEvent(
+                    new DragEvent("drop", {
+                        bubbles: true,
+                        cancelable: true,
+                        dataTransfer
+                    })
+                );
+
+                source.dispatchEvent(
+                    new DragEvent("dragend", {
+                        bubbles: true,
+                        cancelable: true,
+                        dataTransfer
+                    })
+                );
+            }
+            """,
+            {
+            "sourceSelector": source_selector,
+            "targetSelector": target_selector
+            }
+    )
+
     # expect(page).to_have_title(EXPECTED_TITLE)
     time.sleep(3)  # Wait for the page to load
 
     # Identify the draggable item
-    draggable_box = page.locator("#draggable")
-    drop_container_box = page.locator("#drop-container")
     time.sleep(3)
-    draggable_box.hover();
-    page.mouse.down();
-    drop_container_box.hover();
-    page.mouse.up();
+    drag_element(page, "#draggable", "#drop-container")
     time.sleep(5)
-    drag_result = page.locator("strong")
+    drag_result = page.locator("#drag-result")
     expect(drag_result).to_contain_text("Success!")
+    expect(drag_result).to_contain_text("Item dropped correctly!")
     time.sleep(5)  # Wait for the result to be visible
