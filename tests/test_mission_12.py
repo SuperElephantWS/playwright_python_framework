@@ -66,6 +66,7 @@ def test_mission_12(page):
             }
     )
 
+    page.locator("#item1").hover()
     # Drag Pizza
     time.sleep(7)  # Wait for the page to load completely
     drag_element(page, "#item1", "#done-column")
